@@ -1,2 +1,3 @@
 $SHELL_TYPE = 'readline'
-$PROMPT = '{env_name} {INTENSE_GREEN}[{YELLOW}{user}{RESET}:{cwd}{INTENSE_GREEN}]─[{RESET}{INTENSE_GREEN}{curr_branch}]\n{INTENSE_GREEN}╰─>{INTENSE_RED}{prompt_end}{RESET} '
+$PROMPT = '{env_name}{INTENSE_GREEN}[{YELLOW}{user}{RESET}:{cwd}{INTENSE_GREEN}]─[{RESET}{INTENSE_GREEN}{curr_branch}]\n{INTENSE_GREEN}╰─>{INTENSE_RED}{prompt_end}{RESET} '
+xontrib load argcomplete autovox coreutils docker_tabcomplete
