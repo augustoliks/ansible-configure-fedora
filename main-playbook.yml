@@ -80,17 +80,18 @@
     dnf:
       state: latest
       name: [
-      'xclip',
-      'xsel',
-      'htop',
-      'thunderbird',
-      'pinta',
-      'vlc',
-      'youtube-dl',
-      'inkscape',
-      'gimp',
-      'tilix',
-    ]
+        'vim',
+        'xclip',
+        'xsel',
+        'htop',
+        'thunderbird',
+        'pinta',
+        'vlc',
+        'youtube-dl',
+        'inkscape',
+        'gimp',
+        'tilix',
+      ]
 
   - name: To enable classic snap support, enter the following to create a symbolic link between /var/lib/snapd/snap and /snap 
     become: true
