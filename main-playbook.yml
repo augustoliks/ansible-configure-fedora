@@ -1,0 +1,177 @@
+---
+
+- name: Configure My Fedora :)
+  hosts: localhost
+  vars:
+    username: augustoliks
+  tasks:
+
+  - name: Customize Gnome
+    command: gsettings set org.gnome.shell.app-switcher current-workspace-only true
+    become: true
+    become_user: "{{ username }}"
+
+  - name: Install base packages
+    become: true
+    dnf:
+      state: latest
+      name: [
+        'fedora-workstation-repositories',
+        'gnome-tweak-tool',
+        'util-linux-user',
+        'kernel-modules',
+        'gcc',
+        'rpmdevtools', 
+        'rpmlint',
+        'make',
+        'cmake'
+      ]
+  
+  - name: Configure Google Chrome Repo
+    become: true
+    command: dnf config-manager --set-enabled google-chrome
+
+  - name: Install Python Packages
+    become: true
+    dnf:
+      state: latest
+      name: [
+        'google-chrome-stable',
+        'python3-dnf',
+        'python3-devel',
+        'python3-libselinux',
+        'python3-virtualenv',
+        'python3-prompt-toolkit',
+        'python3-pygments',
+        'python3-setproctitle',
+        'xonsh',
+        'ipython'
+      ]
+
+  - name: Install others lang
+    become: true
+    dnf:
+      state: latest
+      name: [
+        'java-1.8.0-openjdk',
+        'java-1.8.0-openjdk-devel',
+        'java-11-openjdk',
+        'java-11-openjdk-devel',
+        'node',
+        'golang',
+        'elixir',
+        'ruby'
+      ]
+
+  - name: Install packages managers
+    become: true
+    dnf:
+      state: latest
+      name: [
+        'snapd',
+        'dnfdragora',
+        'poetry',
+        'maven',
+        'npm',
+      ]
+
+  - name: Install utilities 
+    become: true
+    dnf:
+      state: latest
+      name: [
+      'xclip',
+      'xsel',
+      'htop',
+      'thunderbird',
+      'pinta',
+      'vlc',
+      'youtube-dl',
+      'inkscape',
+      'gimp',
+      'tilix',
+    ]
+
+  - name: To enable classic snap support, enter the following to create a symbolic link between /var/lib/snapd/snap and /snap 
+    become: true
+    file:
+      src: /var/lib/snapd/snap
+      dest: /snap
+      state: link
+
+  - name: Install packages from snapd
+    become: true
+    community.general.snap:
+      classic: true
+      name:
+        - pycharm-community
+        - intellij-idea-community
+        - code
+        - snapd
+        - postman
+        - slack
+        - bitwarden
+        - eclipse
+        - spotify
+        - telegram-desktop
+        - micro
+
+  - name: Disable SELinux
+    become: true
+    ansible.posix.selinux:
+      state: disabled
+ 
+  - name: Costumize bash
+    become: true
+    become_user: "{{ username }}"
+    ansible.builtin.copy:
+      src: .bashrc
+      dest: ~/.bashrc
+      mode: u+rw,g-r,o-r
+
+  - name: Costumize xonsh
+    become: true
+    become_user: "{{ username }}"
+    ansible.builtin.copy:
+      src: .xonsh
+      dest: ~/.xonsh
+      mode: u+rw,g-r,o-r
+
+  # - name: export xonsh to shells register
+  #   become: true
+  #   command: which xonsh >> /etc/shells
+
+  - name: re-enable cgroups v1 on Fedora
+    become: true
+    shell: grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
+ 
+  - name: Docker has the required network access to manage containers
+    become: true
+    ansible.posix.firewalld:
+      zone: trusted
+      interface: docker0
+      permanent: yes
+      state: enabled
+ 
+  - name: Docker has the required network access to manage containers.
+    become: true
+    ansible.posix.firewalld:
+      zone: FedoraWorkstation
+      permanent: yes
+      state: enabled
+      masquerade: yes
+ 
+  - name: Install and enable Docker compatible components.
+    become: true
+    dnf:
+      state: latest
+      name: [
+        'moby-engine', 
+        'docker-compose'
+      ]
+
+  - name: Enable docker in systemd (needed reboot)
+    ansible.builtin.systemd:
+      name: docker
+      state: started
+      enabled: yes
