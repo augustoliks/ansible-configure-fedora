@@ -57,7 +57,6 @@
       - argcomplete
       - autovox
       - coreutils
-      - docker_tabcomplete
 
   - name: Install others lang
     become: true
