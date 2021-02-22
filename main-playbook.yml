@@ -48,6 +48,17 @@
         'ipython'
       ]
 
+  - name: install packages of xonsh
+    become: true
+    command: "xpip install {{ item }}"
+    with_items:
+      - xontrib 
+      - load
+      - argcomplete
+      - autovox
+      - coreutils
+      - docker_tabcomplete
+
   - name: Install others lang
     become: true
     dnf:
