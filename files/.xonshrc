@@ -27,4 +27,4 @@ $PROMPT = '{vte_new_tab_cwd}' + $PROMPT
 $PROMPT = '{env_name}{INTENSE_GREEN}[{YELLOW}{user}{RESET}:{cwd}{INTENSE_GREEN}]─[{RESET}{INTENSE_GREEN}{curr_branch}]\n{INTENSE_GREEN}╰─>{INTENSE_RED}{prompt_end}{RESET} '
 
 
-xontrib load argcomplete autovox docker_tabcomplete coreutils
+xontrib load argcomplete autovox coreutils
