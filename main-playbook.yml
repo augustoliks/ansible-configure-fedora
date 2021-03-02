@@ -82,7 +82,7 @@
         'dnfdragora',
         'poetry',
         'maven',
-        'npm',
+        'npm'
       ]
 
   - name: Install utilities 
@@ -101,6 +101,7 @@
         'inkscape',
         'gimp',
         'tilix',
+        'transmission'
       ]
 
   - name: To enable classic snap support, enter the following to create a symbolic link between /var/lib/snapd/snap and /snap 
