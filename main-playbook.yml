@@ -50,7 +50,7 @@
 
   - name: install packages of xonsh
     become: true
-    command: "xpip install {{ item }}"
+    command: "/usr/bin/python3 -m install {{ item }}"
     with_items:
 #       - xontrib 
       - load
@@ -141,7 +141,7 @@
       dest: ~/.bashrc
       mode: u+rw,g-r,o-r
 
-  - name: Costumize xonsh
+  - name: Customize xonsh
     become: true
     become_user: "{{ username }}"
     ansible.builtin.copy:
