@@ -6,10 +6,10 @@
     username: augustoliks
   tasks:
 
-  - name: Customize Gnome
-    command: gsettings set org.gnome.shell.app-switcher current-workspace-only true
-    become: true
-    become_user: "{{ username }}"
+#   - name: Customize Gnome
+#     command: gsettings set org.gnome.shell.app-switcher current-workspace-only true
+#     become: true
+#     become_user: "{{ username }}"
 
   - name: Install base packages
     become: true
@@ -17,7 +17,7 @@
       state: latest
       name: [
         'fedora-workstation-repositories',
-        'gnome-tweak-tool',
+#         'gnome-tweak-tool',
         'util-linux-user',
         'kernel-modules',
         'gcc',
@@ -52,10 +52,10 @@
     become: true
     command: "xpip install {{ item }}"
     with_items:
-      - xontrib 
+#       - xontrib 
       - load
       - argcomplete
-      - autovox
+#       - autovox
       - coreutils
 
   - name: Install others lang
