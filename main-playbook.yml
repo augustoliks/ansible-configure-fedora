@@ -24,7 +24,8 @@
         'rpmdevtools', 
         'rpmlint',
         'make',
-        'cmake'
+        'cmake',
+        'git'
       ]
   
   - name: Configure Google Chrome Repo
